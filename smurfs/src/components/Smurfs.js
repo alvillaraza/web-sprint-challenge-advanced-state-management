@@ -7,6 +7,7 @@ function Smurfs(props) {
     <>
       <h3>List of Smurfs</h3>
       {props.smurfs.map(smurf => {
+        console.log('smurf data', smurf);
         return <SmurfInfo key={smurf.id} smurf={smurf} />
       })}
     </>
