@@ -1,17 +1,17 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import Smurfs from "./Smurfs";
+import SmurfForm from "./SmurfForm";
 import { connect } from "react-redux";
 import { fetchSmurfs } from "../store/actions";
 
-function App({fetchSmurfs, loadingSmurfs}) {
-  //build a useEffect to trigger our action
+function App({ fetchSmurfs, loadingSmurfs, errorMessage }) {
+
   useEffect(() => {
     fetchSmurfs();
-  }, [fetchSmurfs])
-  //build a case for loading state
-  //show loader when fetching facts
-  // show facts when we have them on the screen
+  }, [fetchSmurfs]);
+ 
+
 
   return (
     <div className="App">
@@ -20,6 +20,8 @@ function App({fetchSmurfs, loadingSmurfs}) {
       <div>Start inside of your `src/index.js` file!</div>
       <div>Have fun!</div>
       {!loadingSmurfs ? <Smurfs /> : <div>...loading Smurfs</div>}
+      {errorMessage !== "" ? <div>{errorMessage}</div> : null}
+      <SmurfForm/>
     </div>
   );
 }
@@ -27,6 +29,7 @@ function App({fetchSmurfs, loadingSmurfs}) {
 function mapStateToProps(state) {
   return {
     loadingSmurfs: state.loadingSmurfs,
+    errorMessage: state.errorMessage,
   };
 }
 

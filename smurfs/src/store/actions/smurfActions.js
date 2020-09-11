@@ -5,6 +5,7 @@ import axios from "axios";
 export const FETCH_SMURFS = "FETCH_SMURFS";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_ERROR = "FETCH_ERROR";
+export const ADD_SMURF = "ADD_SMURF";
 
 //Action creators
 export const fetchSmurfs = () => {
@@ -14,19 +15,29 @@ export const fetchSmurfs = () => {
     axios
       .get("http://localhost:3333/smurfs")
       .then((res) => {
-        console.log('this is res', res.data);
-        dispatch({type: FETCH_SUCCESS, payload: res.data})
+        console.log("this is res", res.data);
+        dispatch({ type: FETCH_SUCCESS, payload: res.data });
       })
       .catch((err) => {
         console.log(err);
-        dispatch({type: FETCH_ERROR, payload: []})
+        dispatch({ type: FETCH_ERROR, payload: { message: "cannot load" } });
       });
   };
 };
 
-//state machine - what will the states be when requesting/retrieving data
-//fetch smurf info --> fetch_success --> fetch_error
-//define action types
-//build action creator
-//send request
-//handle our states for us
+export const addSmurf = (smurf) => {
+  console.log("add smurf action");
+
+  axios
+    .post("http://localhost:3333/smurfs", smurf)
+    .then((res) => {
+      console.log("res post", res.data);
+      // dispatch({ type: ADD_SMURF, payload: res.data });
+    })
+    .catch((err) => {
+      console.log(err);
+      // dispatch({type: FETCH_ERROR, payload: {message: 'cannot load'}})
+    });
+};
+
+
