@@ -26,18 +26,19 @@ export const fetchSmurfs = () => {
 };
 
 export const addSmurf = (smurf) => {
-  console.log("add smurf action");
-
-  axios
-    .post("http://localhost:3333/smurfs", smurf)
-    .then((res) => {
-      console.log("res post", res.data);
-      // dispatch({ type: ADD_SMURF, payload: res.data });
-    })
-    .catch((err) => {
-      console.log(err);
-      // dispatch({type: FETCH_ERROR, payload: {message: 'cannot load'}})
-    });
+  return (dispatch) => {
+    dispatch({type: FETCH_SMURFS})
+    axios
+      .post("http://localhost:3333/smurfs", smurf)
+      .then((res) => {
+        console.log("res post", res.data);
+        dispatch({ type: ADD_SMURF, payload: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({type: FETCH_ERROR, payload: {message: 'cannot load'}})
+      });
+}
 };
 
 
