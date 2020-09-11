@@ -12,10 +12,10 @@ import reducer from "./store/reducers";
 const store = createStore(reducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>,
-  // </React.StrictMode>,
+  </React.StrictMode>,
   document.getElementById("root")
 );
